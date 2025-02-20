@@ -1,4 +1,3 @@
-// server.js (point d'entrée)
 const http = require('http');
 const dotenv = require('dotenv');
 const app = require('./src/index');
