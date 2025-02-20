@@ -1,10 +1,11 @@
 const express = require('express');
 const userRoutes = require('./routes/userRoutes');
 const errorHandler = require('./middlewares/errorHandler');
-const { testDbConnexion } = require('./middlewares/dbTestingConnect');
+const { syncDatabase, testDbConnexion } = require('./models');
 
 const app = express();
 testDbConnexion();
+syncDatabase();
 
 // Middleware pour parser le JSON
 app.use(express.json());
