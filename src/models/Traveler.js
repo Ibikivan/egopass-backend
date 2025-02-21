@@ -7,6 +7,11 @@ const Traveler = sequelize.define('Traveler', {
         primaryKey: true,
         autoIncrement: true,
     },
+    passId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true,
+    },
     flyType: {
         type: DataTypes.STRING,
         allowNull: false,

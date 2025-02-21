@@ -27,8 +27,18 @@ const resetPassword = async (req, res, next) => {
   }
 }
 
+const logout = (req, res, next) => {
+  try {
+    const authToken = req.headers.authorization;
+    res.status(200).json(authservices.logout(authToken));
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   requestPasswordReset,
   verifyCode,
   resetPassword,
+  logout
 };

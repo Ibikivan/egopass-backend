@@ -12,7 +12,8 @@ dotenv.config();
 router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.get('/profil', authMiddleware, userController.profil);
-router.post('/update', authMiddleware, userController.update);
+router.patch('/update', authMiddleware, userController.update);
+router.get('/logout', authMiddleware, authController.logout);
 
 // Change password handleling route
 router.post('/request-reset-password', authController.requestPasswordReset);

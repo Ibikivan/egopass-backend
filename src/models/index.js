@@ -25,7 +25,7 @@ Traveler.belongsTo(User, { foreignKey: 'id' });
 Traveler.hasOne(FreeEGoPASS, { foreignKey: 'id', as: 'freeEGoPASS' });
 FreeEGoPASS.belongsTo(Traveler, { foreignKey: 'id' });
 
-Traveler.hasOne(PayedEGoPASS, { foreignKey: 'id', as: 'payed' });
+Traveler.hasOne(PayedEGoPASS, { foreignKey: 'id', as: 'payedEGoPASS' });
 PayedEGoPASS.belongsTo(Traveler, { foreignKey: 'id' });
 
 PayedEGoPASS.hasOne(Payement, { foreignKey: 'id', as: 'payement' });
