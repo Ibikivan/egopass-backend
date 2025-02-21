@@ -5,7 +5,7 @@ const superAdminRepository = require('../repositories/superAdminRepository');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
-const { sequelize } = require('../models');
+const { sequelize, AgentRVA } = require('../models');
 
 dotenv.config();
 
@@ -88,6 +88,22 @@ const getUserProfile = async (id) => {
   return await userRepository.findUserById(id);
 }
 
+const updateUser = async (id, userData, AgentRVAData) => {
+  return await sequelize.transaction(async (transaction) => {
+    if (userData.password) {
+      delete userData.password
+    }
+
+    if (userData.role) {
+      delete userData.role
+    }
+
+    await userRepository.updateUser(id, userData, transaction);
+    await agentRVARepository.updateAgentRVA(id, AgentRVAData, transaction);
+    return { message: "Profil mis à jour avec succès" };
+  });
+};
+
 module.exports = {
   registerUser,
   registerAgentRVA,
@@ -95,4 +111,5 @@ module.exports = {
   registerSuperAdmin,
   loginUser,
   getUserProfile,
+  updateUser,
 };

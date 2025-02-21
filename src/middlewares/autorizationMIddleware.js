@@ -8,9 +8,6 @@ const authorizationMiddleware = (allowedRoles) => {
       if (!req.user || !req.user.role) {
         return res.status(403).json({ message: 'Accès interdit : informations d\'utilisateur manquantes' });
       }
-
-      console.log({allowedRoles, userRole: req.user.role, isIncludes: !allowedRoles.includes(req.user.role)});
-
       // Vérifier si le rôle de l'utilisateur est dans la liste des rôles autorisés
       if (!allowedRoles.includes(req.user.role)) {
         return res.status(403).json({ message: 'Accès interdit : autorisation insuffisante' });

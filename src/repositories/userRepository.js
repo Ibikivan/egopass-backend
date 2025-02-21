@@ -23,8 +23,47 @@ const findUserById = async (id) => {
   });
 }
 
+const findUserByEmail = async (email) => {
+  return await User.findOne({ where: { email } });
+};
+
+const findUserByPhoneNumber = async (phoneNumber) => {
+  return await User.findOne({ where: { phoneNumber } });
+};
+
+const updateUser = async (id, userData, transaction = null) => {
+  return await User.update(userData, { where: { id }, returning: true, transaction });
+};
+
+const updateResetCode = async (userId, resetCode, resetCodeExpires, transaction = null) => {
+  return await User.update(
+    { resetCode, resetCodeExpires },
+    { where: { id: userId }, transaction }
+  );
+};
+
+const updateUserPassword = async (userId, hashedPassword, transaction = null) => {
+  return await User.update(
+    { password: hashedPassword },
+    { where: { id: userId }, transaction }
+  );
+};
+
+const clearResetCode = async (userId, transaction = null) => {
+  return await User.update(
+    { resetCode: null, resetCodeExpires: null },
+    { where: { id: userId }, transaction }
+  );
+};
+
 module.exports = {
   createUser,
   findUserByUsername,
+  findUserByEmail,
+  findUserByPhoneNumber,
   findUserById,
+  updateUser,
+  updateResetCode,
+  updateUserPassword,
+  clearResetCode
 };

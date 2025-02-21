@@ -41,12 +41,21 @@ const User = sequelize.define('User', {
     },
     phoneNumber: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: true,
     },
     profilePicture: {
         type: DataTypes.STRING,
         allowNull: true,
     },
+    resetCode: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    resetCodeExpires: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    }
 }, {
     tableName: 'users',
     timestamps: true,

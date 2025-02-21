@@ -58,6 +58,16 @@ const profil = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  try {
+    const { userData, specialData } = specializeData(req.body, ["postNom", "workplace"]);
+    const user = await userService.updateUser(req.user.id, userData, specialData);
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -65,4 +75,5 @@ module.exports = {
   registerAgentRVA,
   registerAdmin,
   registerSuperAdmin,
+  update,
 };
