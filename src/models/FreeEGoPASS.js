@@ -7,14 +7,15 @@ const FreeEGoPASS = sequelize.define('FreeEGoPASS', {
         primaryKey: true,
         autoIncrement: true,
     },
-    idGoPass: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     amount: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "0",
+    },
+    status: {
+        type: DataTypes.ENUM('ACTIVATED', 'DISACTIVATED'),
+        allowNull: false,
+        defaultValue: 'ACTIVATED',
     },
 }, {
     tableName: 'free_egopasses',

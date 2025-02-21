@@ -7,9 +7,14 @@ const PayedEGoPASS = sequelize.define('PayedEGoPASS', {
         primaryKey: true,
         autoIncrement: true,
     },
-    idGoPass: {
+    amount: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    status: {
+        type: DataTypes.ENUM('ACTIVATED', 'DISACTIVATED'),
+        allowNull: false,
+        defaultValue: 'ACTIVATED',
     },
 }, {
     tableName: 'payed_egopasses',

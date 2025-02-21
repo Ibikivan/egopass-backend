@@ -28,6 +28,15 @@ function specializeData(data, specializedKeys=[]) {
     return {userData, specialData};
 }
 
+/**
+ * Helper : Générer un code OTP (ici, 6 chiffres)
+ * @returns {string} A randomly generated 6-digit code
+ */
+const generateResetCode = () => {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
 module.exports = {
     specializeData,
+    generateResetCode,
 };
