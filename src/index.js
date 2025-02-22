@@ -6,12 +6,14 @@ const egopassRoutes = require('./routes/egopassRoutes');
 const travelersRoutes = require('./routes/travelersRoutes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 testDbConnexion();
 syncDatabase();
 
 app.use(express.json());
+app.use(cookieParser());
 
 // Users routes
 app.use('/api/users', userRoutes);

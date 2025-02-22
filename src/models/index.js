@@ -22,11 +22,8 @@ SuperAdmin.belongsTo(User, { foreignKey: 'id' });
 User.hasMany(Traveler, { foreignKey: 'id', as: 'traveler' });
 Traveler.belongsTo(User, { foreignKey: 'id' });
 
-Traveler.hasOne(FreeEGoPASS, { foreignKey: 'id', as: 'freeEGoPASS' });
-FreeEGoPASS.belongsTo(Traveler, { foreignKey: 'id' });
-
-Traveler.hasOne(PayedEGoPASS, { foreignKey: 'id', as: 'payedEGoPASS' });
-PayedEGoPASS.belongsTo(Traveler, { foreignKey: 'id' });
+Traveler.belongsTo(FreeEGoPASS, { foreignKey: 'passId', constraints: false, as: 'freePass' });
+Traveler.belongsTo(PayedEGoPASS, { foreignKey: 'passId', constraints: false, as: 'payedPass' });
 
 PayedEGoPASS.hasOne(Payement, { foreignKey: 'id', as: 'payement' });
 Payement.belongsTo(PayedEGoPASS, { foreignKey: 'id' });
