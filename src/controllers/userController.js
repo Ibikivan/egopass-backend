@@ -62,6 +62,13 @@ const registerSuperAdmin = async (req, res, next) => {
 const login = async (req, res, next) => {
   try {
     const { user, token } = await userService.loginUser(req.body.username, req.body.password);
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.SAME_SITE || 'strict',
+    })
+
     res.status(200).json({ message: 'Connexion réussie', user, token });
   } catch (error) {
     next(error);

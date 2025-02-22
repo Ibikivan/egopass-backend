@@ -1,3 +1,4 @@
+const fs = require('fs');
 
 /**
  * Separates data into two objects based on specified keys
