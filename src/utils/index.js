@@ -36,7 +36,20 @@ const generateResetCode = () => {
     return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
+/**
+ * Ensures the existence of a directory by creating it if it doesn't exist
+ * @param {string} dir - The path to the directory to check/create
+ * @throws {Error} If directory creation fails due to permissions or other filesystem errors
+ * @returns {void}
+ */
+const ensureDirectoryExistence = (dir) => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+};
+
 module.exports = {
     specializeData,
     generateResetCode,
+    ensureDirectoryExistence,
 };

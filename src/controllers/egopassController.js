@@ -1,55 +1,85 @@
 const egopassServices = require('../services/egopassSevices');
 
-const create = (req, res) => {
+const create = async(req, res, next) => {
     try {
-        const pass = egopassServices.createPass(req.body);
+        const pass = await egopassServices.createPass(req.body);
         res.status(201).json(pass);
     } catch (error) {
         next(error);
     }
 }
 
-const getFreeQrCode = (req, res) => {
+const getFreeQrCode = async(req, res, next) => {
     try {
-        const passQrCode = egopassServices.getQrCodeForFreePass(req.params.id);
+        const passQrCode = await egopassServices.getQrCodeForFreePass(req.params.id);
         res.status(200).json(passQrCode);
     } catch (error) {
         next(error);
     }
 }
 
-const getPayedQrCode = (req, res) => {
+const getPayedQrCode = async(req, res, next) => {
     try {
-        const passQrCode = egopassServices.getQrCodeForPayedPass(req.params.id);
+        const passQrCode = await egopassServices.getQrCodeForPayedPass(req.params.id);
         res.status(200).json(passQrCode);
     } catch (error) {
         next(error);
     }
 }
 
-const update = (req, res) => {
+const update = async(req, res, next) => {
     try {
-        const pass = egopassServices.updatePass(req.params.id, req.body);
+        const pass = await egopassServices.updatePass(req.params.id, req.body);
         res.status(200).json(pass);
     } catch (error) {
         next(error);
     }
 }
 
-const authenticate = (req, res) => {
-    const pass = {
-        from: 'Douala',
-        to: 'Yaoundé',
-        date: '2021-09-01',
-        time: '08:00',
-        price: 5000,
+const authenticate = async(req, res, next) => {
+    try {
+        const pass = await egopassServices.authenticateFreePass(req.body);
+        res.status(200).json({ message: 'e-GoPASS authentifié avec succès', pass });
+    } catch (error) {
+        next(error);
     }
-    res.status(200).json({ message: 'Pass authentifié avec succès', pass });
 };
 
-const disactivate = (req, res) => {
-    res.status(200).json({ message: 'Pass désactivé avec succès' });
+const disactivate = async(req, res, next) => {
+    try {
+        const pass = await egopassServices.disactivateFreePass(req.body);
+        res.status(200).json({ message: 'e-GoPASS désactivé avec succès', pass });
+    } catch (error) {
+        next(error);
+    }
 }
+
+const deleteFreePass = async(req, res, next) => {
+    try {
+        const pass = await egopassServices.deleteFreePass(req.params.id);
+        res.status(200).json({ message: 'e-GoPASS supprimé avec succès', pass });
+    } catch (error) {
+        next(error);
+    }
+}
+
+const deletePayedPass = async(req, res, next) => {
+    try {
+        const pass = await egopassServices.deletePayedPass(req.params.id);
+        res.status(200).json({ message: 'e-GoPASS supprimé avec succès', pass });
+    } catch (error) {
+        next(error);
+    }
+}
+
+const getAllPass = async (req, res, next) => {
+    try {
+        const result = await egopassServices.getAllEgopasses(req.query);
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    }
+};
 
 module.exports = {
     create,
@@ -57,5 +87,8 @@ module.exports = {
     getPayedQrCode,
     update,
     authenticate,
-    disactivate
+    disactivate,
+    deleteFreePass,
+    deletePayedPass,
+    getAllPass
 };

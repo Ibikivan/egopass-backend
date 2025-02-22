@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { isTokenBlacklisted } = require('../utils/tokenBlacklist');
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -9,6 +10,11 @@ const authMiddleware = (req, res, next) => {
   const token = authHeader.split(' ')[1];
   if (!token) {
     return res.status(401).json({ message: 'Accès non autorisé : format du token invalide' });
+  }
+
+  // Vérifie si le token est révoqué
+  if (isTokenBlacklisted(token)) {
+    return res.status(401).json({ message: 'Token révoqué' });
   }
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {

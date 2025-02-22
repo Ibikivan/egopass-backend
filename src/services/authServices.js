@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { generateResetCode } = require('../utils');
 const { sendEmailOTP } = require('../utils/emailService');
 const { sendSMSOTP } = require('../utils/smsService');
+const { addTokenToBlacklist } = require('../utils/tokenBlacklist');
 
 const requestPasswordReset = async (identifier) => {
     const user = identifier.email
@@ -75,8 +76,17 @@ const resetPassword = async (identifier, newPassword) => {
     });
 };
 
+const logout = (token) => {
+  if (token) {
+    const splitedToken = token.split(' ')[1];
+    addTokenToBlacklist(splitedToken);
+  }
+  return { message: 'Déconnexion réussie' };
+};
+
 module.exports = {
     requestPasswordReset,
     verifyCode,
     resetPassword,
+    logout
 };
