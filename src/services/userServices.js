@@ -88,6 +88,10 @@ const getUserProfile = async (id) => {
   return await userRepository.findUserById(id);
 }
 
+const getUserByEmail = async (email) => {
+  return await userRepository.findUserByEmail(email);
+}
+
 const updateUser = async (id, userData, AgentRVAData) => {
   return await sequelize.transaction(async (transaction) => {
     if (userData.password) {
@@ -111,5 +115,6 @@ module.exports = {
   registerSuperAdmin,
   loginUser,
   getUserProfile,
+  getUserByEmail,
   updateUser,
 };

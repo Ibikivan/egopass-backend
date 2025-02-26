@@ -7,6 +7,11 @@ const travelersRoutes = require('./routes/travelersRoutes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('./swagger');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
+const path = require('path');
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const app = express();
 testDbConnexion();
@@ -14,6 +19,13 @@ syncDatabase();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors(({
+    origin: `${process.env.FRONT_END_HOST}`,
+    credentials: true,
+})))
+
+// Serve static files
+app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 // Users routes
 app.use('/api/users', userRoutes);

@@ -67,6 +67,7 @@ const login = async (req, res, next) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: process.env.SAME_SITE || 'strict',
+      maxAge: 24 * 60 * 60 * 1000
     })
 
     res.status(200).json({ message: 'Connexion réussie', user, token });
@@ -78,6 +79,15 @@ const login = async (req, res, next) => {
 const profil = async (req, res, next) => {
   try {
     const user = await userService.getUserProfile(req.user.id);
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+}
+
+const profilByEmail = async (req, res, next) => {
+  try {
+    const user = await userService.getUserByEmail(req.params.email);
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -103,6 +113,7 @@ module.exports = {
   register,
   login,
   profil,
+  profilByEmail,
   registerAgentRVA,
   registerAdmin,
   registerSuperAdmin,
