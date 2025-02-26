@@ -3,18 +3,15 @@ const { isTokenBlacklisted } = require('../utils/tokenBlacklist');
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    return res.status(401).json({ message: 'Accès non autorisé : token manquant' });
-  }
-
+  
   // Récupère le token depuis les cookies
-  // const token = req.cookies.token;
-
-  const token = authHeader.split(' ')[1];
-  if (!token) {
-    return res.status(401).json({ message: 'Accès non autorisé : format du token invalide' });
+  const cookieToken = req.cookies.token;
+  if (!cookieToken && !authHeader) {
+    return res.status(401).json({ message: 'Accès non autorisé : format du token invalide ou token manquant' });
   }
+  const authToken = authHeader.split(' ')[1];
 
+  const token = cookieToken || authToken;
   // Vérifie si le token est révoqué
   if (isTokenBlacklisted(token)) {
     return res.status(401).json({ message: 'Token révoqué' });

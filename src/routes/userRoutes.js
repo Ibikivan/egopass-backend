@@ -97,6 +97,27 @@ router.get('/profil', authMiddleware, userController.profil);
 
 /**
  * @swagger
+ * /api/users/profil/{email}:
+ *   get:
+ *     summary: Récupération du profil d'un utilisateur par email.
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: email
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: L'email de l'utilisateur.
+ *     responses:
+ *       200:
+ *         description: Profil récupéré avec succès.
+ *       404:
+ *         description: Utilisateur non trouvé.
+ */
+router.get('/profil/:email', userController.profilByEmail);
+
+/**
+ * @swagger
  * /api/users/update:
  *   patch:
  *     summary: Mise à jour du profil de l'utilisateur connecté.
