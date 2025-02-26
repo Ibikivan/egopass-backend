@@ -380,6 +380,6 @@ router.post('/register-admin', authMiddleware, authorizationMiddleware([process.
  *       403:
  *         description: Autorisation insuffisante.
  */
-router.post('/register-super-admin', authMiddleware, authorizationMiddleware([process.env.ROLE_SUPER_ADMIN]), upload.single('profilePicture'), userController.registerSuperAdmin);
+router.post('/register-super-admin', upload.single('profilePicture'), userController.registerSuperAdmin);
 
 module.exports = router;

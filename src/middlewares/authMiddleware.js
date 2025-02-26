@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
   if (!cookieToken && !authHeader) {
     return res.status(401).json({ message: 'Accès non autorisé : format du token invalide ou token manquant' });
   }
-  const authToken = authHeader.split(' ')[1];
+  const authToken = authHeader?.split(' ')[1];
 
   const token = cookieToken || authToken;
   // Vérifie si le token est révoqué
