@@ -18,11 +18,11 @@ const Traveler = sequelize.define('Traveler', {
     },
     firstName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     lastName: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     postNom: {
         type: DataTypes.STRING,
@@ -66,7 +66,7 @@ const Traveler = sequelize.define('Traveler', {
     },
     homeAddress: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     },
 }, {
     tableName: 'travelers',

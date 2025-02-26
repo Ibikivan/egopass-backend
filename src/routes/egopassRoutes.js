@@ -178,6 +178,42 @@ router.get('/get-all', authMiddleware, authorizationMiddleware([process.env.ROLE
 
 /**
  * @swagger
+ * /api/egopass/getall-userfree:
+ *   get:
+ *     summary: Récupération de tous les eGoPASS gratuits activés.
+ *     tags: [eGoPASS]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des eGoPASS gratuits activés récupérée avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   amount:
+ *                     type: string
+ *                   status:
+ *                     type: string
+ *                     enum: [ACTIVATED, DISACTIVATED]
+ *                   createdAt:
+ *                     type: string
+ *                     format: date-time
+ *                   updatedAt:
+ *                     type: string
+ *                     format: date-time
+ *       403:
+ *         description: Autorisation insuffisante.
+ */
+router.get('/getall-userfree', authMiddleware, egopassController.getAllUserFree)
+
+/**
+ * @swagger
  * /api/egopass/authenticate:
  *   post:
  *     summary: Authentification d'un eGoPASS gratuit.

@@ -88,6 +88,59 @@ router.get('/get/:id', authMiddleware, travelersController.getTravel);
 
 /**
  * @swagger
+ * /api/travels/get-all:
+ *   get:
+ *     summary: Récupération de tous les voyageurs.
+ *     tags: [Travelers]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Liste des voyageurs récupérée avec succès.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: integer
+ *                   passId:
+ *                     type: integer
+ *                   flyType:
+ *                     type: string
+ *                   firstName:
+ *                     type: string
+ *                   lastName:
+ *                     type: string
+ *                   postNom:
+ *                     type: string
+ *                   nationality:
+ *                     type: string
+ *                   passeportNumber:
+ *                     type: string
+ *                   flyCompany:
+ *                     type: string
+ *                   flyNumber:
+ *                     type: string
+ *                   provenance:
+ *                     type: string
+ *                   destination:
+ *                     type: string
+ *                   phoneNumber:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                   homeAddress:
+ *                     type: string
+ *       403:
+ *         description: Autorisation insuffisante.
+ */
+router.get('/get-all', authMiddleware, travelersController.getAllTravels);
+
+/**
+ * @swagger
  * /api/travels/update/{id}:
  *   patch:
  *     summary: Mise à jour d'un voyageur.

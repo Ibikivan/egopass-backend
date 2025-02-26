@@ -18,6 +18,15 @@ const getTravel = async (req, res, next) => {
     }
 };
 
+const getAllTravels = async (req, res, next) => {
+    try {
+        const travelers = await travelerServices.getAllTravelers()
+        res.status(200).json(travelers)
+    } catch (error) {
+        next(error)
+    }
+}
+
 const updateTravel = async (req, res, next) => {
     try {
         const traveler = await travelerServices.updateTraveler(req.params.id, req.body);
@@ -39,6 +48,7 @@ const deleteTravel = async (req, res, next) => {
 module.exports = {
     createTravel,
     getTravel,
+    getAllTravels,
     updateTravel,
     deleteTravel,
 };

@@ -81,6 +81,15 @@ const getAllPass = async (req, res, next) => {
     }
 };
 
+const getAllUserFree = async (req, res, next) => {
+    try {;
+        const result = await egopassServices.getAllUserFree();
+        res.status(200).json(result);
+    } catch (error) {
+        next(error);
+    };
+};
+
 module.exports = {
     create,
     getFreeQrCode,
@@ -90,5 +99,6 @@ module.exports = {
     disactivate,
     deleteFreePass,
     deletePayedPass,
-    getAllPass
+    getAllPass,
+    getAllUserFree
 };

@@ -17,7 +17,7 @@ const AgentRVA = sequelize.define('AgentRVA', {
     },
     workplace: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
     }
 }, {
     tableName: 'agents_rva',
