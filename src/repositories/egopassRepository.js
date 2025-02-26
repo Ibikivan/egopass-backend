@@ -92,6 +92,10 @@ const getAllEgopasses = async (filters) => {
     return { total, items: paginatedPasses };
 };
 
+const getAllUserFree = async () => {
+    return await FreeEGoPASS.findAll({where: { amount: "0", status: "ACTIVATED" }})
+}
+
 module.exports = {
     createFreePass,
     createPayedPass,
@@ -102,4 +106,5 @@ module.exports = {
     deleteFreePass,
     deletePayedPass,
     getAllEgopasses,
+    getAllUserFree
 };

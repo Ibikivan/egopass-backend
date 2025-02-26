@@ -11,6 +11,10 @@ const getTravelerById = async (id) => {
     return await travelerRepository.getTravelerById(id);
 };
 
+const getAllTravelers = async () => {
+    return await travelerRepository.getAll()
+}
+
 const updateTraveler = async (id, travelerData) => {
     return await travelerRepository.updateTraveler(id, travelerData);
 };
@@ -22,6 +26,7 @@ const deleteTraveler = async (id) => {
 module.exports = {
     createTraveler,
     getTravelerById,
+    getAllTravelers,
     updateTraveler,
     deleteTraveler,
 };

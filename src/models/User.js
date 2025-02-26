@@ -42,6 +42,7 @@ const User = sequelize.define('User', {
     phoneNumber: {
         type: DataTypes.STRING,
         allowNull: true,
+        unique: false,
     },
     profilePicture: {
         type: DataTypes.STRING,

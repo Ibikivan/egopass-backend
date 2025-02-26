@@ -120,6 +120,10 @@ const getAllEgopasses = async (queryParams) => {
   return await egopassRepository.getAllEgopasses(queryParams);
 };
 
+const getAllUserFree = async () => {
+    return await egopassRepository.getAllUserFree();
+};
+
 module.exports = {
     createPass,
     getQrCodeForFreePass,
@@ -131,5 +135,6 @@ module.exports = {
     disactivateFreePass,
     deleteFreePass,
     deletePayedPass,
-    getAllEgopasses
+    getAllEgopasses,
+    getAllUserFree
 };

@@ -16,10 +16,14 @@ const getTravelerById = async(id, transaction = null) => {
   return await Traveler.findByPk(id, {
     transaction,
     include: [
-        {model: FreeEGoPASS, as: "freeEGoPASS"},
-        {model: PayedEGoPASS, as: "payedEGoPASS"},
+      {model: FreeEGoPASS, as: "freePass"},
+      {model: PayedEGoPASS, as: "payedPass"},
     ]
   });
+}
+
+const getAll = async( ) => {
+  return await Traveler.findAll()
 }
 
 const updateTraveler = async (id, travelerData, transaction = null) => {
@@ -33,6 +37,7 @@ const deleteTraveler = async (id, transaction = null) => {
 module.exports = {
     createTraveler,
     getTravelerById,
+    getAll,
     updateTraveler,
     deleteTraveler,
 };
