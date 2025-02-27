@@ -165,7 +165,7 @@ router.patch('/update', authMiddleware, upload.single('profilePicture'), userCon
  *       401:
  *         description: Utilisateur non autorisé.
  */
-router.get('/logout', authMiddleware, authController.logout);
+router.post('/logout', authMiddleware, authController.logout);
 
 /**
  * @swagger
