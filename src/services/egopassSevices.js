@@ -63,7 +63,7 @@ const updatePass = async (passId, passData) => {
 }
 
 const authenticateFreePass = async (passToken) => {
-    const decodedToken = jwt.verify(passToken, process.env.JWT_SECRET, (err, decoded) => {
+    const decodedToken = jwt.verify(passToken?.passToken, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             throw new Error('Token invalide ou expiré');
         }
@@ -81,7 +81,7 @@ const authenticateFreePass = async (passToken) => {
 
 const disactivateFreePass = async (passToken) => {
     return await sequelize.transaction(async (transaction) => {
-        const decodedToken = jwt.verify(passToken, process.env.JWT_SECRET, (err, decoded) => {
+        const decodedToken = jwt.verify(passToken?.passToken, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
                 throw new Error('Token invalide ou expiré');
             }

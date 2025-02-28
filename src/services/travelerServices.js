@@ -11,8 +11,8 @@ const getTravelerById = async (id) => {
     return await travelerRepository.getTravelerById(id);
 };
 
-const getAllTravelers = async () => {
-    return await travelerRepository.getAll()
+const getAllTravelers = async (filters) => {
+    return await travelerRepository.getAll(filters)
 }
 
 const updateTraveler = async (id, travelerData) => {

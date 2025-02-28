@@ -94,6 +94,17 @@ router.get('/get/:id', authMiddleware, travelersController.getTravel);
  *     tags: [Travelers]
  *     security:
  *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: _activated
+ *         schema:
+ *           type: boolean
+ *         description: Filtrer par statut activé.
+ *       - in: query
+ *         name: _disactivated
+ *         schema:
+ *           type: boolean
+ *         description: Filtrer par statut désactivé.
  *     responses:
  *       200:
  *         description: Liste des voyageurs récupérée avec succès.

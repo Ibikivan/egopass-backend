@@ -20,7 +20,12 @@ const getTravel = async (req, res, next) => {
 
 const getAllTravels = async (req, res, next) => {
     try {
-        const travelers = await travelerServices.getAllTravelers()
+        const filters = {
+            _activated: req.query._activated,
+            _disactivated: req.query._disactivated
+        };
+
+        const travelers = await travelerServices.getAllTravelers(filters)
         res.status(200).json(travelers)
     } catch (error) {
         next(error)
